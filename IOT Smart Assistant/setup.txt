@@ -1,5 +1,5 @@
-client_id=658192f6505846daa46f4487bf4ab052
-client_secret=21366e6a619f44b49f8894d744784b0b
+client_id=658192f6505846daa46f4487bf4ab05
+client_secret=21366e6a619f44b49f8894d744784b0
 device_name=Macbook Pro
 redirect_uri=https://example.com/callback/
 username=7ov1obqudii331ovqu5sp4oli
