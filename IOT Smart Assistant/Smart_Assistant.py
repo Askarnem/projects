@@ -51,7 +51,7 @@ m = Microphone()
 # Load ALBERT model
 from transformers import AlbertForSequenceClassification
 model = AlbertForSequenceClassification.from_pretrained('albert-base-v1', num_labels = 3)
-model.load_state_dict(torch.load('/Users/askarnemaev/Desktop/Project final/AlbertModelparams.pt',  map_location=torch.device('cpu')))
+model.load_state_dict(torch.load('./ALBERT_params.pt',  map_location=torch.device('cpu')))
 #model = model.to(device)
 
 # Import tokenizer and set the Max Length after tokenization
@@ -143,7 +143,7 @@ while True:
         if predict_com == 'spotify':
             
             # Import required API keys and settings
-            setup = pd.read_csv('/Users/askarnemaev/Desktop/Masters/NLP/project/project compile/setup.txt',
+            setup = pd.read_csv('./keys.txt',
             sep='=', index_col=0, squeeze=True, header=None)
             client_id = setup['client_id']
             client_secret = setup['client_secret']
@@ -211,7 +211,7 @@ while True:
 
             # Play the pre-recorded sound identifying that music is about to play in spotify app
             if attempt:
-                playsound("spotify.mp3")
+                playsound("./spotify.mp3")
 
         ################################################################
         #NETFLIX
@@ -304,7 +304,7 @@ while True:
                 return grade.mean()
             
             # Function to get link
-            def netflix_get_link(command,vals=pd.read_pickle('/Users/askarnemaev/Desktop/Masters/NLP/project/project compile/netflix_dat_v2'), weight = np.array([1,1,2,1.5,1,1])):
+            def netflix_get_link(command,vals=pd.read_pickle('./netflix_data'), weight = np.array([1,1,2,1.5,1,1])):
                 import webbrowser
                 command = " ".join(remove_stopwords(replace_all(command,dic)))
                 stemmed_command = " ".join([ps.stem(x) for x in word_tokenize(command)])
@@ -332,7 +332,7 @@ while True:
                     # Open links in browser to watch movie
                     for i in recoms[recoms.columns[0]]:
                         webbrowser.get(chrome_path).open(i)
-                    playsound("netflix.mp3")
+                    playsound("netflix_sound.mp3")
 
             recoms = netflix_get_link(command=command)
 
@@ -340,7 +340,7 @@ while True:
         else:
             # If request is not Spotify or Netflix, the output is defined below. In this part, new appliances can be added, but ALBERT has to be retrained.
             print('Appliance is not connected yet')
-            playsound("other.mp3")
+            playsound("other_sound.mp3")
 
     elif event == sg.WIN_CLOSED:
         break
